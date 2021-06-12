@@ -10,8 +10,8 @@
 </head>
 <body>
 <!-- -Task
-Create 2 php files one of them has a form with the following inputs 
-(name, email, password, address, gender, linkedin url) 
+Create 2 php files one of them has a form with the following inputs
+(name, email, password, address, gender, linkedin url)
 Validate inputs then store data into session, when user open the second file can show stored data. -->
 <nav class="navbar navbar-expand-lg     navbar-dark bg-primary">
 
@@ -29,24 +29,25 @@ Validate inputs then store data into session, when user open the second file can
         <li class="nav-item">
           <a class="nav-link active" href="/nti/task4/show.php">Show the Data</a>
         </li>
-        
+
       </form>
     </div>
   </div>
 </nav>
 
 <div class="container">
-<form class="col-4 m-5" action="<?php  echo $_SERVER['PHP_SELF']; ?>" >
+<div class="row">
+<form class="col-3 m-5" action="<?php echo $_SERVER['PHP_SELF']; ?>"   method="POST"  enctype ="multipart/form-data" >
 <div class="mb-3">
     <label  class="form-label">Name</label>
     <input type="text" class="form-control" name="name"  >
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <label   class="form-label">Email address</label>
     <input type="email" class="form-control" name="email">
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <label   class="form-label">Password</label>
     <input type="password" class="form-control"  name="password">
   </div>
   <div class="mb-3">
@@ -55,10 +56,106 @@ Validate inputs then store data into session, when user open the second file can
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<div class="col-8">
+
+<?php
+ session_start();
+
+function Clean($input)
+{
+
+    $input = trim($input);
+    $input = htmlspecialchars($input);
+    $input = stripcslashes($input);
+
+    return $input;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    $name = clean($_REQUEST['name']);
+    $email = Clean($_REQUEST['email']);
+    $password = Clean($_REQUEST['password']);
+    $address = Clean($_REQUEST['address']);
+
+    $errorMessages = array();
+
+    if (empty($name)) {
+
+        $errorMessages['name'] = "Name Feild Required";
+    } else {
+        if (strlen($name) < 6) {
+            $errorMessages['name'] = "Name must be >= 6";
+        } elseif (!preg_match("/^[a-zA-Z-']*$/", $name)) {
+
+            $errorMessages['name'] = "Only chars allowed";
+
+        }
+    }
+    if (empty($email)) {
+        $errorMessages['email'] = "Email Field Required";
+    } else {
+
+        if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
+            $errorMessages['email'] = "Invalid Email";
+        }
+
+    }
+    if (empty($password)) {
+        $errorMessages['password'] = "Password Field Required";
+    } else {
+
+        if (strlen($password) < 6) {
+            $errorMessages['password'] = "Password Must Be >= 6 ";
+        }
+
+    }
+    if (empty($address)) {
+        $errorMessages['address'] = "address Field Required";
+    } else {
+
+        if (strlen($password) < 6) {
+            $errorMessages['address'] = "address Must Be >= 6 ";
+        }
+
+    }
+
+    if(count($errorMessages)>0){
+        foreach($errorMessages as $key => $data){
+            echo("<div class='alert alert-danger col-4 my-5'> $key :  $data  <br>  </div>");
+ 
+         
+        }
+    }else{
+        $userData = array($name,$email,$password,$address);
+   
+    $_SESSION['userData']  = $userData;
+    
+    $_SESSION['name']  = $name;
+    header("Location: http://localhost/nti/task4/show.php", true, 301);
+ exit();
+    }
+
+
+
+
+}
+
+?>
+
+
+
+
+
+
 </div>
 
 
 
-    <?php  ?>
+</div>
+
+</div>
+
+
 </body>
 </html>

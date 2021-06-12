@@ -24,7 +24,7 @@
         <a class="nav-link active" href="/nti/task4/show.php">Show the Data</a>
 
         </li>
-        
+
     </div>
   </div>
 </nav>
@@ -39,13 +39,17 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td> </td>
-      <td> </td>
-      <td>@ </td>
+      <?php
+session_start();
+$userData = $_SESSION['userData'];
+foreach ($userData as $data) {
+    echo '<td>' . $data . '</td>' . '<br>';
+}
+?>
+
     </tr>
   </tbody>
 </table>
-    <?php ?>
+
 </body>
 </html>
