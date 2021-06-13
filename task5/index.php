@@ -9,31 +9,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-<!-- -Task
-Create 2 php files one of them has a form with the following inputs
-(name, email, password, address, gender, linkedin url)
-Validate inputs then store data into session, when user open the second file can show stored data. -->
-<nav class="navbar navbar-expand-lg     navbar-dark bg-primary">
+<!-- Task 
+Create a from with following fields 
+1-name
+2-email
+3-jobTitle
+4-Cv (Upload Cv   **pdf file Only**).
+& Validate It . -->
 
-  <div class="container-fluid">
-  <a class="navbar-brand" href="#">Task 4</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/nti/task4/show.php">Show the Data</a>
-        </li>
-
-      </form>
-    </div>
-  </div>
-</nav>
 
 <div class="container">
 <div class="row">
@@ -47,12 +30,12 @@ Validate inputs then store data into session, when user open the second file can
     <input type="email" class="form-control" name="email">
   </div>
   <div class="mb-3">
-    <label   class="form-label">Password</label>
-    <input type="password" class="form-control"  name="password">
+    <label   class="form-label">job Title</label>
+    <input type="text" class="form-control"  name="jobtitle">
   </div>
   <div class="mb-3">
-    <label  class="form-label">Address</label>
-    <input type="text" class="form-control" name="address" >
+    <label   class="form-label">C.V</label>
+    <input type="file" class="form-control"  name="uploadedFiles">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -75,9 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $name = clean($_REQUEST['name']);
     $email = Clean($_REQUEST['email']);
-    $password = Clean($_REQUEST['password']);
-    $address = Clean($_REQUEST['address']);
-
+    $jobtitle = Clean($_REQUEST['jobtitle']);
+    
     $errorMessages = array();
 
     if (empty($name)) {
@@ -101,24 +83,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
 
     }
-    if (empty($password)) {
-        $errorMessages['password'] = "Password Field Required";
+    if (empty($jobtitle)) {
+        $errorMessages['jobtitle'] = "jobtitle Field Required";
     } else {
 
-        if (strlen($password) < 6) {
-            $errorMessages['password'] = "Password Must Be >= 6 ";
+        if (strlen($jobtitle) < 6) {
+            $errorMessages['jobtitle'] = "jobtitle Must Be >= 6 ";
         }
 
     }
-    if (empty($address)) {
-        $errorMessages['address'] = "address Field Required";
-    } else {
-
-        if (strlen($password) < 6) {
-            $errorMessages['address'] = "address Must Be >= 6 ";
-        }
-
-    }
+    
 
     if(count($errorMessages)>0){
         foreach($errorMessages as $key => $data){
@@ -126,17 +100,47 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
          
         }
-    }else{
-        $userData = array($name,$email,$password,$address);
-   
-    $_SESSION['userData']  = $userData;
-    
-    $_SESSION['name']  = $name;
-    header("Location: http://localhost/nti/task4/show.php", true, 301);
- exit();
     }
+// upload a pdf 
+    if(!empty($_FILES['uploadedFiles']['name'])){
+
+        $fileTempPath  = $_FILES['uploadedFiles']['tmp_name'];
+        $fileName      = $_FILES['uploadedFiles']['name'];
+        $fileSize      = $_FILES['uploadedFiles']['size'];
+        $filetype      = $_FILES['uploadedFiles']['type'];
 
 
+
+        $fileExtension =   explode(".",$fileName);
+
+        $newName = rand().time().'.'.$fileExtension[1];
+
+         $allowedExtensions = array('pdf');
+
+         if(in_array($fileExtension[1],$allowedExtensions)){
+
+          // code ....
+          
+          $uploaded_folder = "./uploads/";
+
+          $desPath = $uploaded_folder.$newName;
+
+         if(move_uploaded_file($fileTempPath,$desPath)){
+           echo  "<div class='alert alert-success col-4 my-5'> File Uploaded  </div>";
+         }else{
+           echo "<div class='alert alert-danger col-4 my-5'> Error in Uplading file  </div>";
+         }
+
+
+         }else{
+
+          echo  "<div class='alert alert-danger col-4 my-5'> Not Allowed Extension  </div>";
+         }
+        }else{
+
+          echo  "<div class='alert alert-danger col-4 my-5'> please upload File  </div>";
+
+        }
 
 
 }
