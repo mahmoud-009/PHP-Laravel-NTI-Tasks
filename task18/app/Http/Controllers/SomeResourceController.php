@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class SomeResourceController extends Controller
 {
     /**
@@ -15,7 +15,7 @@ class SomeResourceController extends Controller
     {
         //
 
-        echo 'fdfd';
+
         $data = User::get();
 
             return view('users.index',['data' => $data ]);
