@@ -58,8 +58,6 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>email</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
                 <th>Action</th>
             </tr>
 
