@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 
 Route::resource('user','SomeResourceController')->middleware('checkAuth');
-Route::get('Login','SomeResourceController@login')->middleware('checkAuth');
+Route::resource('product','productcontroller')->middleware('checkAuth');
+
+
+Route::get('Login','SomeResourceController@login');
 Route::post('doLogin','SomeResourceController@logicLogin');
 Route::get('Logout','SomeResourceController@logout');
-Route::resource('product','productcontroller')->middleware('checkAuth'); ;;

@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\User;
 class SomeResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function __construct(){
 
         $this->middleware('checkAuth',['except'  => ['create','store','login','logicLogin']]);
 
      }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
 
 
     public function index()

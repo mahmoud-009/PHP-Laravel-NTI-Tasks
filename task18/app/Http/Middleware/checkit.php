@@ -22,8 +22,8 @@ class checkit
         if(Auth::check()){
             return $next($request);
         }else{
-
-            return redirect(url('/Login'));
+dd('please');
+            // return redirect(url('/Login'));
     }
 
     }

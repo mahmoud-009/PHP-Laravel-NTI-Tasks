@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 class productController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('checkAuth',['except'  => ['create','store','login','logicLogin']]);
+
+     }
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +20,7 @@ class productController extends Controller
 
 
 
-    public function __construct(){
-
-        $this->middleware('checkAuth',['except'  => ['create']]);
-
-     }
+   
 
 
     public function index()
