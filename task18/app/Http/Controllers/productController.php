@@ -11,6 +11,16 @@ class productController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function __construct(){
+
+        $this->middleware('checkAuth',['except'  => ['create']]);
+
+     }
+
+
     public function index()
     {
         //
@@ -124,7 +134,6 @@ class productController extends Controller
         session()->flash('message',$message);
 
          return redirect(url('/product'));
-
 
 
 
