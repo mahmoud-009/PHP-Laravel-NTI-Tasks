@@ -26,7 +26,7 @@
 
 <div class="container">
   <h2>Vertical (basic) form</h2>
-  <form   action ="{{url('/user')}}"    method="post" enctype ="multipart/form-data">
+  <form   action ="{{url('/product')}}"    method="post" enctype ="multipart/form-data">
 
 
    {{-- <input type="hidden" name="_token" value="<?php //echo csrf_token();?>"> --}}
@@ -41,13 +41,13 @@
   </div>
 
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email"  name="email"  value="{{ old('email') }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="exampleInputEmail1">Description</label>
+    <input type="text"  name="desc"  value="{{ old('email') }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
 
   <div class="form-group">
-    <label for="exampleInputPassword1">New Password</label>
-    <input type="password"  name="password"  value="{{ old('password') }}" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="exampleInputPassword1">Price</label>
+    <input type="text"  name="price"  value="{{ old('password') }}" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
 
 

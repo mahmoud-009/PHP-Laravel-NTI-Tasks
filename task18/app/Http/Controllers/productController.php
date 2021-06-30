@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Product;
 class productController extends Controller
 {
     /**
@@ -16,9 +16,9 @@ class productController extends Controller
         //
 
 
-        $data = User::get();
+        $data = Product::get();
 
-            return view('users.index',['data' => $data ]);
+            return view('product.index',['data' => $data ]);
     }
 
     /**
@@ -43,13 +43,13 @@ class productController extends Controller
         //
         $data = $this->validate($request,[
             "name"  => "required|min:3",
-            "email" => "required|email",
-            "password" => "required|min:5|max:10"
+            "desc" => "required|min:3",
+            "price" => "required|min:5|max:10"
          ]);
 
-        $data['password'] = bcrypt($data['password']);
+        // $data['password'] = bcrypt($data['password']);
 
-        $op =   User::create($data);
+        $op =   Product::create($data);
 
         $message = "Error Try Again";
 
@@ -60,7 +60,7 @@ class productController extends Controller
 
         session()->flash('message',$message);
 
-        return redirect(url('/user'));
+        return redirect(url('/product'));
 
 
 
@@ -89,8 +89,8 @@ class productController extends Controller
     public function edit($id)
     {
         //
-        $data = User::find($id)->toArray();
-        return view('users.edit',['data' => $data]);
+        $data = Product::find($id)->toArray();
+        return view('product.edit',['data' => $data]);
 
     }
 
@@ -106,7 +106,7 @@ class productController extends Controller
         //
         $data = $this->validate($request,[
             "name"  => "required|min:3",
-            "email" => "required|email",
+            "desc" => "required|min:3",
          ]);
 
 
@@ -121,7 +121,7 @@ class productController extends Controller
 
         session()->flash('message',$message);
 
-         return redirect(url('/user'));
+         return redirect(url('/product'));
 
 
 
@@ -138,7 +138,7 @@ class productController extends Controller
     public function destroy($id)
     {
         //
-        $op = User::find($id)->delete();
+        $op = Product::find($id)->delete();
 
         $message = "Error in delete";
 
