@@ -37,17 +37,17 @@
 
   <div class="form-group">
     <label for="exampleInputEmail1">Name</label>
-    <input type="text" name="name"  value="{{ old('name') }}"  class="form-control" id="exampleInputName" aria-describedby="" placeholder="Enter Name">
+    <input type="text" name="name"  value="{{ old('name') }}"  class="form-control"  placeholder="Enter Name">
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Description</label>
-    <input type="text"  name="desc"  value="{{ old('email') }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <input type="text"  name="desc"  value="{{ old('desc') }}"  class="form-control"  placeholder="Description">
   </div>
 
   <div class="form-group">
     <label for="exampleInputPassword1">Price</label>
-    <input type="text"  name="price"  value="{{ old('password') }}" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <input type="text"  name="price"  value="{{ old('price') }}" class="form-control"  placeholder="price">
   </div>
 
 

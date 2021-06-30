@@ -18,6 +18,7 @@ class Product extends Migration
         $table->string('name',100);
         $table->string('price',100);
         $table->string('desc');
+        $table->timestamps();
     });
     }
 

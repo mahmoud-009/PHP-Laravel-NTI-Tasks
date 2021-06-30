@@ -110,7 +110,7 @@ class productController extends Controller
          ]);
 
 
-         $op = User::where('id',$id)->update($data);
+         $op = Product::where('id',$id)->update($data);
 
 
          $message = "Error Try Again !!!";
