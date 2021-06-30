@@ -38,7 +38,7 @@
     <input type="password"  name="password"  value="{{ old('password') }}" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
 
-
+ 
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
 </div>

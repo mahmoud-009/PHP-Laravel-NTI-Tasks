@@ -107,6 +107,8 @@ class productController extends Controller
         $data = $this->validate($request,[
             "name"  => "required|min:3",
             "desc" => "required|min:3",
+            "price" => "required|min:3",
+
          ]);
 
 

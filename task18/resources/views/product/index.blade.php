@@ -57,8 +57,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>email</th>
-                <th>Action</th>
+                <th>Price</th>
+                <th>Description</th>
             </tr>
 
 

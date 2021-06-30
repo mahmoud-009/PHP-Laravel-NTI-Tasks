@@ -167,7 +167,7 @@ class SomeResourceController extends Controller
 
 
           if(auth()->attempt($data,false)){
-              return redirect('/user');
+              return redirect('/product');
           }else{
               return redirect('/Login');
           }

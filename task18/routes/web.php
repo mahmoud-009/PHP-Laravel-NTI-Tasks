@@ -19,5 +19,7 @@ Route::get('/', function () {
 
 
 Route::resource('user','SomeResourceController');
-
-Route::resource('product','productController');
+Route::get('Login','SomeResourceController@login');
+Route::post('doLogin','SomeResourceController@logicLogin');
+Route::get('Logout','SomeResourceController@logout');
+Route::resource('product','productcontroller') ;;
